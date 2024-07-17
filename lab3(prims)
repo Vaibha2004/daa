@@ -1,0 +1,46 @@
+#include<stdio.h>
+#include<stdlib.h>
+int n,cost[10][10],i,j,visited[10],mst;
+int prims()
+{
+	int min,a,b,count=0,cost_mst=0,i,j;
+	visited[0]=1;
+	while(count<n-1)
+	{
+		min=999;
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				if(visited[i]==1 && (visited[j]==0 && cost[i][j]<min))
+				{
+					min=cost[i][j];
+					a=i;
+					b=j;
+				}
+			}
+		}
+		cost_mst+=cost[a][b];
+		printf("\n%d--->%d=%d\n",a,b,cost[a][b]);
+		visited[b]=1;
+		count++;
+	}
+	return(cost_mst);
+}
+int main()
+{
+	printf("Enter the number of vertices:");
+	scanf("%d",&n);
+	printf("Enter the cost matrix\n");
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<n;j++)
+		{
+			scanf("%d",&cost[i][j]);
+		}
+		visited[i]=0;
+	}
+	mst=prims();
+	printf("\nCost of minimum spanning tree is %d",mst);
+	return 0;
+}
