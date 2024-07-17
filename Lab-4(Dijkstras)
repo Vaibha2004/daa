@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+int n,cost[10][10],i,j,visited[10],dest[10];
+int minimum(int m,int n){
+	return ((m<n)?m:n);
+}
+int sssp(int src)
+{
+	int v,w,min;
+	for(i=1;i<=n;i++){
+		visited[i]=0;
+		dest[i]=cost[src][i];
+	}
+	visited[src]=1;
+	for(i=1;i<=n;i++)
+	{
+		min=99;
+		for(j=1;j<=n;j++)
+		{
+			if(visited[j]==0 && dest[j]<min)
+			{
+				min=dest[j];
+			    w=j;
+			}
+		}
+		visited[w]=1;
+		for(v=1;v<=n;v++){
+			if(visited[v]==0){
+				dest[v]=minimum(dest[v],dest[w]+cost[w][v]);
+			}
+		}
+	}
+}
+int main()
+{
+	int src;
+	printf("Enter the number of vertices:");
+	scanf("%d",&n);
+	printf("Enter the cost matrix\n");
+	for(i=1;i<=n;i++)
+	{
+		for(j=1;j<=n;j++)
+		{
+			scanf("%d",&cost[i][j]);
+		}
+		visited[i]=0;
+	}
+	printf("\nEnter the source vertex:");
+	scanf("%d",&src);
+	sssp(src);
+	printf("\nThe shortest distance from the source to other vertices:\n");
+	for(i=1;i<=n;i++){
+		printf("\n%d--->%d=%d",src,i,dest[i]);
+	}
+	return 0;
+}
