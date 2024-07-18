@@ -1,0 +1,52 @@
+#include<stdio.h>
+int a[10],c[10],n,low,high;
+int simplesort(int a[10], int low,int mid, int high){
+	int i=low;
+	int j=mid+1;
+	int k=low;
+	while(i<=mid&&j<=high){
+		if(a[i]<a[j]){
+			c[k++]=a[i++];
+		}
+		else{
+		c[k++]=a[j++];
+		}
+	}
+	while(i<=mid)
+	c[k++]=a[i++];
+	while(j<=high)
+	c[k++]=a[j++];
+	for(i=low;i<=high;i++){
+		a[i]=c[i];
+	}
+}
+
+void mergesort(int a[10],int low ,int high){
+	if(low<high){
+		int mid= (low+high)/2;
+		mergesort(a,low,mid);
+		mergesort(a,mid+1,high);
+		simplesort(a,low,mid,high);
+		return;
+	}
+}
+int main(){
+	int i;
+	printf("Enter the number of elements of array:\n");
+	scanf("%d",&n);
+	printf("Enter the array elements:\n");
+	for(i=0;i<n;i++){
+		scanf("%d",&a[i]);
+	}
+	printf("Array elements before sorting:\n");
+	for(i=0;i<n;i++){
+	printf("%5d",a[i]);
+	}
+	mergesort(a,0,n-1);
+    printf("\nArray elements after sorting:\n");
+    for(i=0;i<n;i++)
+	{
+		printf("%5d",a[i]);
+	}
+	return 0;
+}
