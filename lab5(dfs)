@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <stdlib.h>
+void dfs(int u, int n, int a[10][10], int visited[10]) {
+    visited[u] = 1;
+    for (int v = 1; v <= n; v++) {
+        if (visited[v] == 0 && a[u][v] == 1) {
+            dfs(v, n, a, visited); 
+        }
+    }
+}
+int checkOn(int a[10][10], int n) {
+    int visited[10];
+    for (int i = 1; i <= n; i++) {
+        visited[i] = 0;
+    }
+    dfs(1, n, a, visited);
+    for (int i = 1; i <= n; i++) {
+        if (visited[i] == 0) { 
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    int a[10][10];
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+    printf("Enter the adjacency matrix:\n");
+    for (int i=1;i<=n;i++){
+        for(int j=1;j<=n;j++){
+            scanf("%d",&a[i][j]);
+        }
+    }
+    int result=checkOn(a,n);
+    if(result == 1){
+        printf("The graph is connected.\n");
+    } 
+    else{
+        printf("The graph is not connected.\n");
+    }
+    return 0;
+}
