@@ -1,0 +1,36 @@
+#include<stdio.h>
+int i,j,w[10],W,max_profit,p[10],n;
+int max(int a, int b)
+{
+    if(a>b){
+    	return a;
+	}
+	else{
+		return b;
+	}
+}
+int knapsack(int i,int W)
+{
+	if(i==n && w[i]<W){
+		return 0;
+	}
+	if(i==n && w[i]<=W){
+		return(p[i]);
+	}
+	if(w[i]>W){
+		return(knapsack(i+1,W));
+	}
+	return(max(knapsack(i+1,W),p[i]+knapsack(i+1,W-w[i])));
+}
+int main(){
+	printf("Enter the number of objects:\n");
+	scanf("%d",&n);
+	printf("Enter the weight and profit of each object:\n");
+	for(i=0;i<n;i++){
+		scanf("%d%d",&w[i],&p[i]);
+	}
+	printf("Enter the knapsack capacity:\n");
+	scanf("%d",&W);
+	max_profit=knapsack(0,W);
+	printf("The maximum profit is:%d",max_profit);
+}
