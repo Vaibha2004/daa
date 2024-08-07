@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 int a[10],n,low,high;
-int partition(int a[10],int low ,int high)
+int partition(int a[],int low ,int high)
 {
  	int temp;
  	int povt=a[low];
@@ -21,11 +21,11 @@ int partition(int a[10],int low ,int high)
 		 	temp=a[j];
 		 	a[j]=a[low];
 		 	a[low]=temp;
+		 	return j;
 		}
-		return j;
 	}
 }
-void quicksort(int a[10],int low,int high){
+void quicksort(int a[],int low,int high){
 	if(low<high){
 		int p=partition(a,low,high);
 		quicksort(a,low,p-1);
