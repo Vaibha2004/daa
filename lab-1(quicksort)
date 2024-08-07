@@ -1,5 +1,5 @@
 #include<stdio.h>
-#include<conio.h>
+#include<stdlib.h>
 int a[10],n,low,high;
 int partition(int a[10],int low ,int high)
 {
